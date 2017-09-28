@@ -75,3 +75,18 @@ void reversa(double **M, int dim)
 		printf("X%d = %lf\t", i+1, x[i]);
 	printf("\n\n");
 }
+
+void determinante(double **M, int dim, int cont)
+{
+	double det=1;
+	int i;
+
+	for(i=0; i<dim; i++)
+		det*=M[i][i];
+
+	printf("\n Determinante: ");
+	if(cont%2==0)
+		printf("%.2lf \n", det);
+	else
+		printf("%.2lf \n", -1.0*det);
+}
