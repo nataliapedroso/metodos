@@ -52,3 +52,26 @@ double escalonamento(double **M, int dim, int n)
 	}
 }
 
+void reversa(double **M, int dim)
+{
+	double b, x[dim+1], aux;
+	int i, j;
+
+	b=M[dim-1][dim];
+	x[3]=b/M[dim-1][dim-2];
+
+	for(i=dim-1; i>=0; i--)
+	{
+		b=M[i][dim];
+		for(j=i+1; j<dim; j++)
+			aux+=M[i][j]*x[j];
+
+		x[i]=(b-aux)/M[i][i];
+		aux=0;
+	}
+
+	printf("\n Solução: \n");
+	for(i=0; i<dim; i++)
+		printf("X%d = %lf\t", i+1, x[i]);
+	printf("\n\n");
+}
