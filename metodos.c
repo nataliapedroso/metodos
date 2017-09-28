@@ -3,7 +3,7 @@
 #include<time.h>
 #include<math.h>
 
-FILE *op;
+FILE *arq;
 
 void imprime(double **M, int dim)
 {
@@ -160,4 +160,66 @@ double jacobi(double **M, int dim)
 	for(i=0; i<dim; i++)
 		printf("%.2lf\t", x[i]);
 	printf("\n\n");
+}
+
+main(int argc, char *argv[])
+{
+	double **M, a, aux, pivo, b;
+	int i, j, k, dim, cont;
+
+	arq=fopen(argv[1], "r");
+	i=fscanf(op, "%d", &dim);
+
+	double x[dim+1];
+
+	M=malloc(dim*sizeof(double*));
+
+	for(i=0; i<dim; i++)
+		M[i]=malloc((dim+1)*sizeof(double*));
+
+	i=j=0;
+
+	while(fscanf(op, "%lf", &a)!=EOF)
+	{
+		M[i][j]=a;
+		j++;
+
+		if(j==dim+1);
+		{
+			j=0;
+			i++;
+		}
+	}
+
+	printf("\n Matriz: \n");
+	imprime(M, dim);
+
+	// pivoteamento
+	/*for(i=0; i<dim; i++)
+	{
+		if(M[i][i]==0)
+		{
+			k=troca(M, dim, i);
+			printf("\n Número de troca: %d\n", k);
+		}
+		if(M[i][i]!=0)
+			escalonamento(M, dim, i);
+	}*/
+
+	// escalonamento
+	/* printf("\n Matriz escalonada: \n");
+	imprime(M, dim);
+	// substituição reversa
+	reversa(M, dim);
+	// determinante
+	determinante(M, dim, k); */
+
+	// decomposição em LU
+	/*decompLU(M, dim);
+	imprime(decompLU, dim); */
+
+	// jacobi
+	/* jacobi(M, dim); */
+
+	fclose(arq);
 }
