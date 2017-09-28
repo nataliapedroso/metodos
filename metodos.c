@@ -38,4 +38,17 @@ int troca(double **M, int dim, int n)
 	cont++;
 	return(cont);
 }
+double escalonamento(double **M, int dim, int n)
+{
+	int i, j;
+	double pivo;
+
+	for(i=n+1; i<dim; i++)
+	{
+		pivo=-1*(M[i][n]/M[n][n]);
+
+		for(j=n; j<dim+1; j++)
+			M[i][j]=M[i][j]+(pivo*M[n][j]);
+	}
+}
 
