@@ -122,3 +122,42 @@ double **decompLU(double **M, int dim)
 
 	imprime(L,dim);
 }
+
+double jacobi(double **M, int dim)
+{
+	double er=1e-5, x0[dim], soma=0, b[dim], x[dim], dis;
+	int i, j, k;
+
+	for(i=0; i<dim; i++)
+	{
+		x[i]=0;
+		b[i]=M[i][4];
+	}
+
+	do
+	{
+		for(i=0; i<dim; i++)
+			x0[i]=x[i];
+
+		dis=0;
+
+		for(i=0; i<dim; i++)
+		{
+			soma=0;
+			for(j=0; j<dim; j++)
+			{
+				if(j!=i)
+					soma+=M[i][j]*x0[j];
+			}
+			x[i]=(1/M[i][i])*(b[i]-soma);
+			dis+=fabs(x0[i]-x[i]);
+		}
+	} while(dis<er);
+
+	printf(" %.2g\t", dis);
+	printf("\n %.2g\t", er);
+
+	for(i=0; i<dim; i++)
+		printf("%.2lf\t", x[i]);
+	printf("\n\n");
+}
