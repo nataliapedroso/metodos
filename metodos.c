@@ -90,3 +90,35 @@ void determinante(double **M, int dim, int cont)
 	else
 		printf("%.2lf \n", -1.0*det);
 }
+
+double **decompLU(double **M, int dim)
+{
+	int i, j, k;
+	double **L, **U, pivo, r;
+
+	L=malloc(dim*sizeof(double*));
+	U=malloc(dim*sizeof(double*));
+
+	for(k=0; k<dim; k++)
+	{
+		L[k][1]=M[k][1];
+		U[k][k]=1;
+
+		for(j=1; j<dim; j++)
+			U[1][j]=M[1][j]/L[1][1];
+	}
+
+	for(k=0; k<dim; k++)
+	{
+		for(i=1; i<dim; i++)
+			r+=L[i][k]*U[i][k];
+	}
+
+	for(i=1; i<dim; i++)
+	{
+		for(j=1; j<dim; j++)
+			L[i][j]=M[i][j]-r;
+	}
+
+	imprime(L,dim);
+}
